@@ -27,6 +27,7 @@ import static in.ashwanthkumar.utils.collections.Lists.map;
  */
 public class Search {
     private static final Logger LOG = LoggerFactory.getLogger(CreateIndex.class);
+    public static final int MAX_RESULTS = 10;
 
     public static void main(String[] args) throws IOException, ParseException {
         String indexLocation = args[0];
@@ -37,7 +38,7 @@ public class Search {
         Analyzer analyzer = new StandardAnalyzer();
 
         QueryParser parser = new QueryParser("word", analyzer);
-        TopDocs result = searcher.search(parser.parse(searchString), 10);
+        TopDocs result = searcher.search(parser.parse(searchString), MAX_RESULTS);
         foreach(
                 map(Arrays.asList(result.scoreDocs), extractWord(searcher)),
                 Functions.<String>STDOUT()
