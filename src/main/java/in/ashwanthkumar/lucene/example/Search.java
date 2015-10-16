@@ -37,7 +37,7 @@ public class Search {
         final IndexSearcher searcher = new IndexSearcher(reader);
         Analyzer analyzer = new StandardAnalyzer();
 
-        QueryParser parser = new QueryParser("word", analyzer);
+        QueryParser parser = new QueryParser("title", analyzer);
         TopDocs result = searcher.search(parser.parse(searchString), MAX_RESULTS);
         foreach(
                 map(Arrays.asList(result.scoreDocs), extractWord(searcher)),
